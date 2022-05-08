@@ -106,9 +106,22 @@ const renderDate = () => {
 
 // taskFormEl.on("click", "#9", handleSubmit);  <-- Texting function - not working
 
+// This function listens to the main container through event bubbling of its children.
+const handleSave = (event) => {
+  let target = $(event.target);
+  let currentDKValue = target.attr("data-key");
+  if (target[0].tagName == "BUTTON") {
+    let currentEl = $(`[data-textarea-key='${currentDKValue}']`);
+    let textAreaInputText = currentEl.val();
+    console.log(textAreaInputText);
+  }
+  console.log(textAreaInputText);
+};
+
 const onceLoaded = () => {
   iterateOverArray();
   setInterval(renderDate, 1000);
 };
 
 $(document).ready(onceLoaded);
+divMainContEl.on("click", handleSave);
