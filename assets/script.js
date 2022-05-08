@@ -115,7 +115,6 @@ const handleSave = (event) => {
     let textAreaInputText = currentEl.val();
     console.log(textAreaInputText);
   }
-  console.log(textAreaInputText);
 };
 
 const onceLoaded = () => {
