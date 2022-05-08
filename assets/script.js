@@ -126,7 +126,18 @@ const handleSave = (event) => {
   }
 };
 
+const initializeLS = () => {
+  // Calling the schedule array from the local storage
+  const scheduleFromLS = JSON.parse(localStorage.getItem("schedule"));
+
+  // If the array is undefined, we create an empty array and push it to the local storage
+  if (!scheduleFromLS) {
+    localStorage.setItem("schedule", JSON.stringify({}));
+  }
+};
+
 const onceLoaded = () => {
+  initializeLS();
   iterateOverArray();
   setInterval(renderDate, 1000);
 };
