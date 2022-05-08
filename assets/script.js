@@ -4,7 +4,6 @@ const currentDayEl = $("#currentDay");
 const divMainContEl = $("#main-container");
 
 // Working hours object
-
 const workingHours = [
   {
     label: "9am",
@@ -118,10 +117,7 @@ const handleSave = (event) => {
       return;
     }
     // This saves the user's input text at that time as an object for later.
-    const userSchedule = {
-      currentDKValue,
-      textAreaInputText,
-    };
+    saveToLS("schedule", currentDKValue, textAreaInputText);
     console.log(userSchedule);
   }
 };
@@ -134,6 +130,19 @@ const initializeLS = () => {
   if (!scheduleFromLS) {
     localStorage.setItem("schedule", JSON.stringify({}));
   }
+};
+
+const saveToLS = (location, key, value) => {
+  // Calls the local storage object.
+  const arrayFromLS = JSON.parse(localStorage.getItem(location));
+  console.log(arrayFromLS);
+
+  // Adds a new value to the object
+  arrayFromLS[key] = value;
+  console.log(arrayFromLS);
+
+  // Saves the new object to the local storage
+  localStorage.setItem(location, JSON.stringify(arrayFromLS));
 };
 
 const onceLoaded = () => {
