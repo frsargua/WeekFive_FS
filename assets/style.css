@@ -1,5 +1,5 @@
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 16px;
   line-height: 1;
 }
@@ -68,4 +68,25 @@ textarea {
 .saveBtn i:hover {
   font-size: 20px;
   transition: all 0.3s ease-in-out;
+}
+
+/* Past Present Future */
+
+.past {
+  background-color: #9a2617;
+}
+
+.past:focus {
+  background-color: #cd594a;
+}
+
+.present {
+  background-color: #bca136;
+}
+.present:focus {
+  background-color: #efd469;
+}
+
+.future {
+  background-color: transparent;
 }
