@@ -113,7 +113,16 @@ const handleSave = (event) => {
   if (target[0].tagName == "BUTTON") {
     let currentEl = $(`[data-textarea-key='${currentDKValue}']`);
     let textAreaInputText = currentEl.val();
-    console.log(textAreaInputText);
+    // If the textArea is empty you ignore this function and nothing is stored.
+    if (!textAreaInputText) {
+      return;
+    }
+    // This saves the user's input text at that time as an object for later.
+    const userSchedule = {
+      currentDKValue,
+      textAreaInputText,
+    };
+    console.log(userSchedule);
   }
 };
 
