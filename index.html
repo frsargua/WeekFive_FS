@@ -34,50 +34,22 @@
     </header>
     <!-- Timeblocks go here -->
     <!-- 9am -->
-    <div class="container d-flex pb-1" id="schedulerContainer">
-      <!-- <h2 class="col-2 border-top p-0">9am</h2> -->
-      <form id="taskForm" class="container-fluid d-flex p-0">
-        <label for="workPlanner" class="col-2 border-top p-0 text-center"
-          >9am</label
+    <div id="main-container" class="container d-flex flex-column">
+      <div class="container-fluid d-flex p-0">
+        <label
+          for="value1"
+          class="col-2 border-top p-0 text-center d-flex align-items-center justify-content-center m-0"
+          ><p class="my-auto">9am</p></label
         >
-        <input
-          type="text"
-          id="inputPassword6"
-          class="form-control h-100"
-          name="workPlanner"
-          aria-describedby="passwordHelpInline"
-        />
-        <button id="9" class="btn btn-primary btn-sm">Save</button>
-      </form>
+        <textarea
+          data-textarea-key="value1"
+          class="form-control"
+          id="value1"
+          rows="2"
+        ></textarea>
+        <button data-key="Value0" class="btn btn-primary btn-sm">Save</button>
+      </div>
     </div>
-    <!-- 10am -->
-    <!-- <div class="container d-flex pb-1" id="schedulerContainer">
-      <h2 class="col-2 border-top p-0">10am</h2>
-      <form id="taskForm" class="container-fluid d-flex p-0">
-        <input
-          type="text"
-          id="inputPassword6"
-          class="form-control h-100"
-          name="workPlanner"
-          aria-describedby="passwordHelpInline"
-        />
-        <button class="btn btn-primary btn-sm">Click</button>
-      </form>
-    </div> -->
-    <!-- 11am -->
-    <!-- <div class="container d-flex pb-1" id="schedulerContainer">
-      <h2 class="col-2 border-top p-0">11am</h2>
-      <form id="taskForm" class="container-fluid d-flex p-0">
-        <input
-          type="text"
-          id="inputPassword6"
-          class="form-control h-100"
-          name="workPlanner"
-          aria-describedby="passwordHelpInline"
-        />
-        <button class="btn btn-primary btn-sm">Click</button>
-      </form>
-    </div> -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
