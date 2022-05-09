@@ -2,7 +2,8 @@
 const taskFormEl = $("#taskForm");
 const currentDayEl = $("#currentDay");
 const divMainContEl = $("#main-container");
-
+let currentTime = parseInt(moment().format("H"));
+console.log(currentTime);
 // Working hours object
 const workingHours = [
   {
@@ -103,12 +104,35 @@ const renderDate = () => {
   currentDayEl.text(today);
 };
 
-// taskFormEl.on("click", "#9", handleSubmit);  <-- Texting function - not working
+const changeTimeBlockColor = () => {
+  const scheduleFromLS = loadFromLS();
+  for (let i = 0; i < 9; i++) {
+    let index = String(i + 9);
+    let currentTimeBlock = $(`[id='${index}']`);
+
+    if (index < currentTime) {
+      currentTimeBlock.addClass("past");
+    } else if (index == currentTime) {
+      currentTimeBlock.addClass("present");
+    }
+  }
+
+  let secondIndex = 9;
+  for (const element of scheduleFromLS) {
+    let currentTimeBlock = $(`[id='${secondIndex}']`);
+
+    if (element[0] == secondIndex) {
+      currentTimeBlock.text(element[1]);
+    }
+    secondIndex++;
+  }
+};
 
 // This function listens to the main container through event bubbling of its children.
 const handleSave = (event) => {
   let target = $(event.target);
   let currentDKValue = target.attr("data-key");
+  console.log(typeof currentDKValue);
   if (target[0].tagName == "BUTTON") {
     let currentEl = $(`[data-textarea-key='${currentDKValue}']`);
     let textAreaInputText = currentEl.val();
@@ -118,7 +142,6 @@ const handleSave = (event) => {
     }
     // This saves the user's input text at that time as an object for later.
     saveToLS("schedule", currentDKValue, textAreaInputText);
-    console.log(userSchedule);
   }
 };
 
@@ -135,20 +158,28 @@ const initializeLS = () => {
 const saveToLS = (location, key, value) => {
   // Calls the local storage object.
   const arrayFromLS = JSON.parse(localStorage.getItem(location));
-  console.log(arrayFromLS);
 
   // Adds a new value to the object
   arrayFromLS[key] = value;
-  console.log(arrayFromLS);
 
   // Saves the new object to the local storage
   localStorage.setItem(location, JSON.stringify(arrayFromLS));
+};
+
+const loadFromLS = () => {
+  // Getting the object from local storage.
+  const arrayFromLS = Object.entries(
+    JSON.parse(localStorage.getItem("schedule"))
+  );
+  console.log(arrayFromLS);
+  return arrayFromLS;
 };
 
 const onceLoaded = () => {
   initializeLS();
   iterateOverArray();
   setInterval(renderDate, 1000);
+  changeTimeBlockColor();
 };
 
 $(document).ready(onceLoaded);
