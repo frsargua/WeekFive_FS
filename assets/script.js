@@ -138,10 +138,12 @@ const handleSave = (event) => {
     let textAreaInputText = currentEl.val();
     // If the textArea is empty you ignore this function and nothing is stored.
     if (!textAreaInputText) {
-      return;
+      // return;
+      saveToLS("schedule", currentDKValue, "");
+    } else {
+      // This saves the user's input text at that time as an object for later.
+      saveToLS("schedule", currentDKValue, textAreaInputText);
     }
-    // This saves the user's input text at that time as an object for later.
-    saveToLS("schedule", currentDKValue, textAreaInputText);
   }
 };
 
