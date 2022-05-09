@@ -59,7 +59,7 @@ const renderTimeBlocks = (timeText, key) => {
   // Create div
   const divTimeBlockEl = $("<div>");
   //Add classes to div
-  divTimeBlockEl.attr("class", "container-fluid d-flex p-0");
+  divTimeBlockEl.attr("class", "container-fluid d-flex p-0 pb-1");
 
   // Create label inside the div
   const labelTextAreaEl = $("<label>");
@@ -80,6 +80,9 @@ const renderTimeBlocks = (timeText, key) => {
   textAreaEl.attr("id", key);
   textAreaEl.attr("class", "form-control");
 
+  const divButtonEl = $("<div>");
+  divButtonEl.attr("class", "d-flex flex-column");
+
   //create button
   const buttonEl = $("<button>");
   //add attributes
@@ -88,7 +91,16 @@ const renderTimeBlocks = (timeText, key) => {
   //add text
   buttonEl.text("Save");
 
-  divTimeBlockEl.append(labelTextAreaEl, textAreaEl, buttonEl);
+  //create button
+  const clearButtonEl = $("<button>");
+  //add attributes
+  clearButtonEl.attr("data-key-clear", key);
+  clearButtonEl.attr("class", "btn btn-dark btn-sm");
+  //add text
+  clearButtonEl.text("Clear");
+
+  divButtonEl.append(buttonEl, clearButtonEl);
+  divTimeBlockEl.append(labelTextAreaEl, textAreaEl, divButtonEl);
   divMainContEl.append(divTimeBlockEl);
 };
 
@@ -146,7 +158,19 @@ const handleSave = (event) => {
     }
   }
 };
-
+const handleClear = (event) => {
+  let target = $(event.target);
+  let currentDKValue = target.attr("data-key-clear");
+  if (target[0].tagName == "BUTTON") {
+    let currentEl = $(`[data-textarea-key='${currentDKValue}']`);
+    currentEl.val("");
+    // If the textArea is empty you ignore this function and nothing is stored.
+    // if (!textAreaInputText) {
+    // return;
+    saveToLS("schedule", currentDKValue, "");
+  }
+  // }
+};
 const initializeLS = () => {
   // Calling the schedule array from the local storage
   const scheduleFromLS = JSON.parse(localStorage.getItem("schedule"));
@@ -186,3 +210,4 @@ const onceLoaded = () => {
 
 $(document).ready(onceLoaded);
 divMainContEl.on("click", handleSave);
+divMainContEl.on("click", handleClear);
