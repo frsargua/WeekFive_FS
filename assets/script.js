@@ -3,6 +3,7 @@ const taskFormEl = $("#taskForm");
 const currentDayEl = $("#currentDay");
 const divMainContEl = $("#main-container");
 let currentTime = parseInt(moment().format("H"));
+// let currentTime = 12;
 console.log(currentTime);
 // Working hours object
 const workingHours = [
@@ -78,7 +79,7 @@ const renderTimeBlocks = (timeText, key) => {
   textAreaEl.attr("data-textarea-key", key);
   textAreaEl.attr("rows", "2");
   textAreaEl.attr("id", key);
-  textAreaEl.attr("class", "form-control");
+  textAreaEl.attr("class", "form-control mr-1");
 
   const divButtonEl = $("<div>");
   divButtonEl.attr("class", "d-flex flex-column");
@@ -124,8 +125,11 @@ const changeTimeBlockColor = () => {
 
     if (index < currentTime) {
       currentTimeBlock.addClass("past");
+      currentTimeBlock.attr("readonly", true);
     } else if (index == currentTime) {
       currentTimeBlock.addClass("present");
+    } else {
+      currentTimeBlock.addClass("future");
     }
   }
 
