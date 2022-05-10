@@ -42,11 +42,7 @@ textarea {
   border-top: 1px dashed #000000;
 }
 
-.past {
-  background-color: #d3d3d3;
-  color: white;
-}
-
+/*
 .present {
   background-color: #ff6961;
   color: white;
@@ -55,7 +51,7 @@ textarea {
 .future {
   background-color: #77dd77;
   color: white;
-}
+} */
 
 .saveBtn {
   border-left: 1px solid black;
@@ -72,21 +68,18 @@ textarea {
 
 /* Past Present Future */
 
-.past {
-  background-color: #9a2617;
-}
-
-.past:focus {
-  background-color: #cd594a;
-}
-
 .present {
-  background-color: #bca136;
+  border: 2px solid #a2f1fe;
 }
 .present:focus {
-  background-color: #efd469;
+  background-color: #fbfeff;
 }
 
 .future {
-  background-color: transparent;
+  border: 2px solid #86ceb2;
+}
+
+.future:focus {
+  border-color: #86ceb2;
+  box-shadow: 0 0 0 0.2rem #b3e2d0;
 }
