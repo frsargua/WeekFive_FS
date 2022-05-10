@@ -45,6 +45,7 @@ const workingHours = [
   },
 ];
 
+// Generic timeblocks rendering function.
 const renderTimeBlocks = (timeText, key) => {
   // Create div
   const divTimeBlockEl = $("<div>");
@@ -94,7 +95,7 @@ const renderTimeBlocks = (timeText, key) => {
   divMainContEl.append(divTimeBlockEl);
 };
 
-// This function iterates over the workingHours array of objects.
+// This function iterates over the workingHours array of objects and utilizes its values to create a series of timeBlocks.
 const iterateOverArray = () => {
   console.log("this is iterateOverArray");
   workingHours.forEach((index) => renderTimeBlocks(index.label, index.key));
@@ -106,6 +107,7 @@ const renderDate = () => {
   currentDayEl.text(today);
 };
 
+// Checks the timeBlock's key and compares it against the current time to determine if they are a past/present/future events.
 const changeTimeBlockColor = () => {
   const scheduleFromLS = loadFromLS();
   for (let i = 0; i < 9; i++) {
@@ -133,7 +135,8 @@ const changeTimeBlockColor = () => {
   }
 };
 
-// This function listens to the main container through event bubbling of its children.
+// This functions listens to the main container by getting the click action from its children through event-bubbling.
+// This function saves the input text, as a key:value pair, into the local storage.
 const handleSave = (event) => {
   let target = $(event.target);
   let currentDKValue = target.attr("data-key");
@@ -151,6 +154,7 @@ const handleSave = (event) => {
     }
   }
 };
+//This function deletes a key:value pair from the local storage.
 const handleClear = (event) => {
   let target = $(event.target);
   let currentDKValue = target.attr("data-key-clear");
@@ -164,6 +168,8 @@ const handleClear = (event) => {
   }
   // }
 };
+
+// Creates/Calls schedule object from local storage.
 const initializeLS = () => {
   // Calling the schedule array from the local storage
   const scheduleFromLS = JSON.parse(localStorage.getItem("schedule"));
@@ -173,7 +179,7 @@ const initializeLS = () => {
     localStorage.setItem("schedule", JSON.stringify({}));
   }
 };
-
+// Saves key: value pair into local storage
 const saveToLS = (location, key, value) => {
   // Calls the local storage object.
   const arrayFromLS = JSON.parse(localStorage.getItem(location));
@@ -201,6 +207,11 @@ const onceLoaded = () => {
   changeTimeBlockColor();
 };
 
+// When the page is loaded the onceLoaded function is called.
 $(document).ready(onceLoaded);
+
+// When the save button is clicked, the sibling text area is saved into the local storage.
 divMainContEl.on("click", handleSave);
+
+// When the clear button is clicked, the sibling text area is cleared and saved.
 divMainContEl.on("click", handleClear);
