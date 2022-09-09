@@ -138,24 +138,24 @@ const changeTimeBlockColor = () => {
 // This function saves the input text, as a key:value pair, into the local storage.
 const handleSave = (event) => {
   let target = $(event.target);
+  if (target[0].tagName !== "BUTTON") {
+    return;
+  }
   let currentDKValue = target.attr("data-key");
-  if (target[0].tagName == "BUTTON") {
-    let currentEl = $(`[data-textarea-key='${currentDKValue}']`);
-    let textAreaInputText = currentEl.val();
-    // If the textArea is empty you ignore this function and nothing is stored.
-    if (!textAreaInputText) {
-      // return;
-      saveToLS("schedule", currentDKValue, "");
-    } else {
-      // This saves the user's input text at that time as an object for later.
-      saveToLS("schedule", currentDKValue, textAreaInputText);
-    }
+  console.log(currentDKValue);
+  let currentEl = $(`[data-textarea-key='${currentDKValue}']`);
+  let textAreaInputText = currentEl.val();
+  // If the textArea is empty you ignore this function and nothing is stored.
+  if (textAreaInputText) {
+    saveToLS("schedule", currentDKValue, textAreaInputText);
   }
 };
+
 //This function deletes a key:value pair from the local storage.
 const handleClear = (event) => {
   let target = $(event.target);
   let currentDKValue = target.attr("data-key-clear");
+  if (!currentDKValue) return;
   if (target[0].tagName == "BUTTON") {
     let currentEl = $(`[data-textarea-key='${currentDKValue}']`);
     currentEl.val("");
@@ -174,7 +174,7 @@ const initializeLS = () => {
 
   // If the array is undefined, we create an empty array and push it to the local storage
   if (!scheduleFromLS) {
-    localStorage.setItem("schedule", JSON.stringify({ 15: "" }));
+    localStorage.setItem("schedule", JSON.stringify({}));
   }
 };
 // Saves key: value pair into local storage
