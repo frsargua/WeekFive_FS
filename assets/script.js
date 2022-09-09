@@ -4,7 +4,7 @@ const currentDayEl = $("#currentDay");
 const divMainContEl = $("#main-container");
 let currentTime = parseInt(moment().format("H"));
 // let currentTime = 12;
-console.log(currentTime);
+
 // Working hours object
 const workingHours = [
   {
@@ -97,7 +97,6 @@ const renderTimeBlocks = (timeText, key) => {
 
 // This function iterates over the workingHours array of objects and utilizes its values to create a series of timeBlocks.
 const iterateOverArray = () => {
-  console.log("this is iterateOverArray");
   workingHours.forEach((index) => renderTimeBlocks(index.label, index.key));
 };
 
@@ -140,7 +139,6 @@ const changeTimeBlockColor = () => {
 const handleSave = (event) => {
   let target = $(event.target);
   let currentDKValue = target.attr("data-key");
-  console.log(typeof currentDKValue);
   if (target[0].tagName == "BUTTON") {
     let currentEl = $(`[data-textarea-key='${currentDKValue}']`);
     let textAreaInputText = currentEl.val();
@@ -196,7 +194,6 @@ const loadFromLS = () => {
   const arrayFromLS = Object.entries(
     JSON.parse(localStorage.getItem("schedule"))
   );
-  console.log(arrayFromLS);
   return arrayFromLS;
 };
 
