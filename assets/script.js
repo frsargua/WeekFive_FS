@@ -174,7 +174,7 @@ const initializeLS = () => {
 
   // If the array is undefined, we create an empty array and push it to the local storage
   if (!scheduleFromLS) {
-    localStorage.setItem("schedule", JSON.stringify({}));
+    localStorage.setItem("schedule", JSON.stringify({ 15: "" }));
   }
 };
 // Saves key: value pair into local storage
