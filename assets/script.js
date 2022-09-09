@@ -109,6 +109,7 @@ const renderDate = () => {
 // Checks the timeBlock's key and compares it against the current time to determine if they are a past/present/future events.
 const changeTimeBlockColor = () => {
   const scheduleFromLS = loadFromLS();
+
   for (let i = 0; i < 9; i++) {
     let index = String(i + 9);
     let currentTimeBlock = $(`[id='${index}']`);
@@ -121,16 +122,15 @@ const changeTimeBlockColor = () => {
     } else {
       currentTimeBlock.addClass("future");
     }
-  }
 
-  let secondIndex = 9;
-  for (const element of scheduleFromLS) {
-    let currentTimeBlock = $(`[id='${secondIndex}']`);
+    for (const element of scheduleFromLS) {
+      let currentTimeBlock = $(`[id='${index}']`);
 
-    if (element[0] == secondIndex) {
-      currentTimeBlock.text(element[1]);
+      if (element[0] == String(index)) {
+        console.log(index, element[0]);
+        currentTimeBlock.text(element[1]);
+      }
     }
-    secondIndex++;
   }
 };
 
